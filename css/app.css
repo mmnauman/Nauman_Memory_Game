@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -38,8 +39,8 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 550px;
+    min-height: 580px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
@@ -48,12 +49,12 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    margin: 100px 0 3em;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 100px;
+    width: 100px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -67,7 +68,8 @@ h1 {
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02b3e4;
+    background: #269abc;
+    border: 1px solid #1b6d85;
     cursor: default;
 }
 
@@ -77,8 +79,18 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #5cb85c;
     font-size: 33px;
+    border: 1px solid #4cae4c;
+}
+
+.deck .card.unmatched {
+    background: #e2043b;
+}
+
+.deck .card.disabled {
+    pointer-events: none;
+    opacity: 0.9;
 }
 
 /*
@@ -105,5 +117,525 @@ h1 {
 
 .score-panel .restart {
     float: right;
+    cursor: pointer;
+}
+
+.clock {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    border: 2px solid white;
+    box-shadow: 0px 0px 10px 15px black;
+    background: rgba(0, 0, 0, .8);
+    z-index: 0;
+}
+
+.timer {
+    background: rgba(0, 0, 0, .1);
+    text-shadow: 0px 0px 10px green;
+    width: 100%;
+    color: green;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    top: 30%;
+    font-size: 50px;
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 11;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 1%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    color: #fff;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    z-index: 99999;
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px
+    }
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+.easy,
+.medium,
+.hard {
+    cursor: pointer;
+
+}
+
+.overlay .overlayHeading {
+    font-size: 40px;
+    color: #818181;
+
+}
+
+.clock {
+    position: absolute;
+    top: -250px;
+    right: 50px;
+    transition: .5s;
+    animation: shakeClock 1s infinite;
+}
+
+.overlayContent span {
+    display: block;
+}
+
+.clock::before {
+    content: "";
+    position: absolute;
+    background-color: black;
+    height: 88px;
+    width: 10px;
+    z-index: 999;
+    top: -79px;
+    transform: rotate(-30deg);
+    border-radius: 10px;
+
+}
+
+.clock::after {
+    content: "";
+    position: absolute;
+    background-color: black;
+    height: 85px;
+    width: 10px;
+    z-index: 999;
+    top: -78px;
+    right: 10px;
+    transform: rotate(30deg);
+    border-radius: 10px;
+}
+
+body {
+    background: url("../puzzle.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header {
+    width: 100%;
+}
+
+#navMenu {
+    background: rgba(0, 0, 0, .8);
+    max-height: 60px;
+    width: 100%;
+}
+
+#navMenu .navLogo {
+    display: inline-block;
+    width: 20%;
+    position: relative;
+    left: 0px;
+    padding: 5px;
+    padding-left: 20px;
+    text-decoration: none;
+    font-size: 40px;
+    font-weight: bolder;
+    text-shadow: 3px 2px 5px blue;
+    color: #fff;
+}
+
+#navMenu a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#navMenu ul {
+    text-align: right;
+    width: 75%;
+    display: inline-block;
+    list-style: none;
+    position: relative;
+    right: 0px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+#navMenu ul li {
+    display: inline-block;
+    margin: 0px 20px 10px 20px;
+    vertical-align: bottom;
+
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+/* Modal Content */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+}
+
+.stars li i {
+    color: gold;
+}
+
+/* The Close Button */
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes shakeClock {
+    0% {
+        transform: translate(0px);
+    }
+
+    50% {
+        transform: translate(30px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}
+
+.mainHead {
+    position: fixed;
+    background: #1D4350;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A43931, #1D4350);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A43931, #1D4350);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    width: 100%;
+    margin: 0 auto;
+    min-height: 400px;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: inherit;
+    height: 100vh;
+    z-index: 99999;
+    background-attachment: fixed;
+}
+
+#main_heading {
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 3px 3px 10px grey;
+    font-size: 50px;
+    text-transform: uppercase;
+    padding-top: 50px;
+    color: #02ccba;
+    text-shadow: 2px 2px 5px black;
+    margin-bottom: 50px;
+    font-family: sans-serif;
+}
+
+#main_heading small span {
+    color: white;
+    text-shadow: 2px 2px 5px black;
+}
+
+#main_heading small {
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+    left: 20%;
+    display: block;
+    text-shadow: 2px 2px 5px black;
+    color: #fff;
+}
+
+.inputBox {
+    width: 80%;
+    height: 50px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    padding-left: 20px;
+    font-size: 16px;
+    z-index: 0;
+}
+
+#gameStart {
+    height: 45px;
+    border-radius: 7px;
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+    outline: none;
+    border: none;
+    font-size: 19px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1px solid rgba(0, 255, 0, .1);
+    font-family: inherit;
+    font-weight: 600;
+    z-index: 0;
+}
+
+#askName {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#username {
+    color: red;
+}
+
+ul#showRatings {
+    list-style: none;
+}
+
+#showRatings li {
+    display: inline-block;
+    color: gold;
+    margin: 0px 5px;
+    font-size: 25px;
+}
+
+.silver {
+    display: block;
+    position: absolute;
+    font-size: 100px;
+    color: rgb(151, 147, 147);
+    right: 20%;
+    bottom: 20%;
+}
+
+.gold {
+    display: block;
+    position: absolute;
+    font-size: 100px;
+    color: gold;
+    right: 20%;
+    bottom: 20%;
+}
+
+.bronze {
+    display: block;
+    position: absolute;
+    font-size: 100px;
+    color: #CD7F32;
+    right: 20%;
+    bottom: 20%;
+}
+
+.score-panel {
+    width: 100%;
+    max-width: 600px;
+    max-height: 60px;
+    height: 100%;
+    position: absolute;
+    top: 130px;
+    background: #aa7ecd;
+}
+
+.score-panel::before {
+    display: inline-block;
+    clear: both;
+    position: absolute;
+    top: 60px;
+    content: "";
+    right: 0px;
+    border-right: 25px solid #f27d68;
+    border-top: 20px solid transparent;
+    transform: rotate(180deg);
+}
+
+.score-panel::after {
+    position: absolute;
+    top: 60px;
+    content: "";
+    left: 0px;
+    border-left: 25px solid #f27d68;
+    border-top: 20px solid transparent;
+    transform: rotate(180deg);
+}
+
+.stars {
+    position: relative;
+    top: 15px;
+    text-align: left;
+    left: 20px;
+    width: 20%;
+    font-weight: bold;
+}
+
+#movesWrap {
+    display: block;
+    text-align: center;
+    width: 30%;
+    margin: 0 auto;
+    font-weight: bold;
+    position: relative;
+    bottom: 5px;
+    color: gold;
+}
+
+#restart {
+    width: 20%;
+    text-align: right;
+    position: relative;
+    right: 20px;
+    bottom: 28px;
+    font-weight: bold;
+    color: gold;
+}
+
+#restart span {
+    display: block;
+    font-size: 0.8em;
+    position: relative;
+    left: 10px;
+    bottom: 4px;
+}
+
+#howToPlay {
+    z-index: 999999;
+    text-align: left;
+}
+
+#howToPlay ol {
+    font-size: 22px;
+    text-align: left;
+    padding: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#howToPlay ol li {
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 500px) {
+    .deck {
+        width: 100%!important;
+        max-width: 100%!important;
+    }
+
+    .deck li {
+        margin: 10px;
+    }
+
+    .clock {
+        display: none;
+    }
+
+    #navMenu .navLogo {
+        font-size: 16px;
+        bottom: 10px
+    }
+
+    #navMenu ul li a {
+        text-align: center;
+        font-size: 12px;
+        margin: 0px!important;
+    }
+
+}
+
+@media screen and (max-width: 970px) {
+    .clock {
+        width: 100px;
+        height: 60px;
+        font-size: 14px;
+        box-shadow: 0px 0px 2px 2px black;
+        left: 50%;
+        top: 60px!important;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .clock .timer {
+        top: 5%;
+    }
+
+    .clock::before,
+    .clock::after {
+        content: "";
+        display: none;
+
+    }
+}
+
+.playAgain {
+    height: 45px;
+    width: 50%;
+    background-color: #337ab7;
+    border-radius: 4px;
+    color: #fff;
+    border: 1px solid #122b40;
     cursor: pointer;
 }

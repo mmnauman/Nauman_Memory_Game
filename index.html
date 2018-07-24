@@ -1,86 +1,213 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Matching Game</title>
     <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
+
 <body>
 
     <div class="container">
+
         <header>
-            <h1>Matching Game</h1>
+
+            <nav id='navMenu'>
+                <a class='navLogo' href="#">BMG</a>
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="javascript:void(0)" onclick='openModal()'>HOW TO PLAY</a></li>
+                    <li><a target="_blank" href="https://twitter.com/NaumanCEO">ABOUT</a></li>
+                </ul>
+
+            </nav>
+
+            <div class="mainHead">
+                <h1 id='main_heading'>Best Memory Game <small>A Project By <span>MM Nauman</span></small></h1>
+
+                <div>
+                    <form action="">
+                        <p id='askName'>Enter Your Name:</p><input type="text" class='inputBox' placeholder='Please Enter Your Name:'>
+                        <button id='gameStart'>Start Game</button>
+
+                    </form>
+                </div>
+            </div>
+
+
+
+
         </header>
 
+
+        <div class="clock" id="CountDownWrap">
+
+            <div class="timer">
+
+
+            </div>
+
+
+        </div>
+
+        <div id="gameLevels" class="overlay">
+
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+            <div class="overlay-content">
+                <div class="gameLevels">
+                    <h3 class='overlayHeading'>Select Your Difficulty Level - <span id='userName'></span></h3>
+                    <div class="easy"><a id='easy' class="gameLevelBtn">Easy</a>
+                        <p class='overlayContent'>
+                            <span>You Will Get 5 mins To Complete The Game</span>
+                            <span>You will Get All 3 stars if you complete the Game under 10 moves</span>
+                            <span>No Badge will be rewarded</span>
+                        </p>
+                    </div>
+                    <div class="medium">
+                        <a id='medium' class="gameLevelBtn">
+                    Medium
+                </a>
+
+                        <p class='overlayContent'>
+                            <span>You Will Get 3 mins To Complete The Game</span>
+                            <span>You will Get All 3 stars if you complete the Game under 10 moves</span>
+                            <span>You will win The Regular Badge</span>
+                        </p>
+
+                    </div>
+                    <div class="hard">
+                        <a class="gameLevelBtn" id='hard'>
+                     Hard
+                 </a>
+
+                        <p class='overlayContent'>
+                            <span>You Will Get 2 mins To Complete The Game</span>
+                            <span>You will Get All 3 stars if you complete the Game under 10 moves</span>
+                            <span>You will win The Best Player Badge</span>
+                        </p>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div id="howToPlay" class="overlay">
+
+            <a href="javascript:void(0)" class="closebtn" onclick="closeModal()">&times;</a>
+
+            <div class="overlay-content">
+                <h2>HOW TO PLAY?</h2>
+                <ol>
+                    <li>First you will see a input box on the homepage asking your name. Enter Your Name or any thing you like. (Optional)</li>
+                    <li>Click on Play Game Button.</li>
+                    <li>You will see three levels. Easy, Medium, Hard select as you want.</li>
+                    <li>In Easy Level you will get 5 mins.if you complete this successfully you will get Bronze Medal</li>
+                    <li>In Medium Level you will get 3 mins to complete the game. You will be awarded silver medal.</li>
+                    <li>In The last and hard Level you will get 2 mins to complete the game. You will be awarded Gold Medal.</li>
+                    <li>Play Just for the enjoyment if you found any bugs please ignore it.</li>
+
+                </ol>
+            </div>
+        </div>
+
+        <div id="Result" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Congratulations! <span id='usernameHere'></span> You Have Completed the Game</h2>
+                <p>You have Completed the Game in <span id='tookTime'></span><br/> You have made <span id='showMoves'></span><br/> Because You have selected the Difficulty Level <span id='showDiffLevel'></span>
+                </p>
+                You got
+                <ul id='showRatings'></ul><br/>
+
+                <button class='playAgain' onclick='location.reload()
+'>Play Again?</button>
+            </div>
+
+        </div>
+
+
+
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+            </ul>
 
-        	<span class="moves">3</span> Moves
+            <span class="moves" id='movesWrap'>0 Moves</span>
 
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+            <div class="restart" id='restart'>
+                <i class="fa fa-repeat"></i><span>Reset</span>
+            </div>
         </section>
 
+
         <ul class="deck">
-            <li class="card">
-                <i class="fa fa-diamond"></i>
+            <li class="card" data-name="diamond">
+                <i class="fas fa-gem"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
+            <li class="card" data-name="plane">
+                <i class="fas fa-plane"></i>
             </li>
-            <li class="card match">
+            <li class="card match" data-name="anchor">
                 <i class="fa fa-anchor"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="bolt">
                 <i class="fa fa-bolt"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="cube">
                 <i class="fa fa-cube"></i>
             </li>
-            <li class="card match">
+            <li class="card match" data-name="anchor">
                 <i class="fa fa-anchor"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="leaf">
                 <i class="fa fa-leaf"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="bicycle">
                 <i class="fa fa-bicycle"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-diamond"></i>
+            <li class="card" data-name="diamond">
+                <i class="fas fa-gem"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="bomb">
                 <i class="fa fa-bomb"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="leaf">
                 <i class="fa fa-leaf"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="bomb">
                 <i class="fa fa-bomb"></i>
             </li>
-            <li class="card open show">
+            <li class="card open show" data-name="bolt">
                 <i class="fa fa-bolt"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="bicycle">
                 <i class="fa fa-bicycle"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
+            <li class="card" data-name="plane">
+                <i class="fas fa-plane"></i>
             </li>
-            <li class="card">
+            <li class="card" data-name="cube">
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
     </div>
-
     <script src="js/app.js"></script>
 </body>
+
 </html>
