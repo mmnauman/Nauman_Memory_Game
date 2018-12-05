@@ -4,7 +4,7 @@
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
-* [HowToPlay](#How To Play?)
+* [How To Play](#how to play)
 * [Medals & Trophies](#Medals & Trophies)
 * [Features](#Features)
 
@@ -22,7 +22,7 @@ This repository is the starter code for _all_ Udacity students. Therefore, we mo
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## How To Play?
+## How To Play
 
 1. First you will see a input box on the homepage asking your name. Enter Your Name or any thing you like. (Optional)
 2. Click on Play Game Button.
