@@ -5,7 +5,7 @@
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 * [How To Play](#how-to-play)
-* [Medals](#medals-trophies)
+* [Medals](#medals--trophies)
 * [Features](#Features)
 
 ## Instructions
